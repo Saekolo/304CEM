@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+  <script>
+	
+	
+	function openForm() {
+	document.getElementById("myForm").style.display = "block";
+	}
+
+	function closeForm() {
+	document.getElementById("myForm").style.display = "nonfole";
+	}
+
+  </script>	
+  
+  
+  <script>
+	function check(){
+	var login=$("#login").val();
+	var pass=$("#password").val();
+	var mydata="login="+login+"&password="+pass;
+	 console.log(mydata);
+	 
+	 if(login === "" || pass ===""){
+	alert("Invalid Username or Password, Please try again.");
+	return;
+	}else{
+	alert("Loading...");
+	}
+	 
+        $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:9999/logindata',
+			dataType:"text",
+			data:mydata,
+			success: function(data) {
+			if(data=="ACgotcha"){
+				alert("checking....");
+				localStorage.setItem("loginok", login);
+				location.href="/hmpage";
+			}else{
+				alert("No record found. Please register");
+				return;        
+            }
+			},
+            error: function(xhr, status, error) {
+			    console.log('Error: ' + error.message);
+            }
+        });
+    };
+	
+	</script>
+	
+	<script>
+	function check2(){
+	
+	var login=$("#login").val();
+	var pass=$("#password").val();
+	var mydata="login="+login+"&password="+pass;
+	 console.log(mydata);
+	 
+	 if(login === "" || pass ===""){
+	alert("Invalid Username or Password, Please try again.");
+	return;
+	}else{
+	alert("Loading...");
+	}
+	
+		$.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:9999/regsdata',
+			dataType:"text",
+			data:mydata,
+			success: function(data) { 
+				alert(data);
+                console.log('gogo');
+                console.log(data); 
+	        },
+            
+            error: function(xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
+        });
+    };
+</script>
+
+
+<script>
+	function check3(){
+	
+	var email=$("#inputEmail").val();
+	var mydata="Email="+email;
+	 console.log(mydata);
+	 
+	 if(email === ""){
+	alert("Input cannot be blank");
+	return;
+	}else{
+	alert("Subscribing...");
+	}
+	
+		$.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:9999/subscribe',
+			dataType:"text",
+			data:mydata,
+			success: function(data) { 
+				alert(data);
+                console.log(data); 
+	        },
+            
+            error: function(xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
+        });
+    };
+</script>
+
+	<script async src="https://cse.google.com/cse.js?cx=c9f86322868c9c318"></script> 
+
+<script>
+function joinUs() {
+alert ("For member only")
+}
+</script>
+
+<script>
+// Prevent dropdown menu from closing when click inside the form
+$(document).on("click", ".action-buttons .dropdown-menu", function(e){
+	e.stopPropagation();
+});
+</script>
+
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  	<!-- Title -->
+        <title>Delicious - Food Blog</title>
+
+	<!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="img/coreimg/favicon.ico"/>
+
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
+        <!-- Google fonts-->     
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		
+	<!-- Core Stylesheet -->
+		<link rel="stylesheet" href="css/style3.css" />
+		<link rel="stylesheet" href="css/styles.css" />
+		<link rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="css/corestyle.css"/>
+		<link rel="stylesheet" href="css/owlcarousel.css"/>
+		<link rel="stylesheet" href="css/themifyicons.css"/>
+		<link rel="stylesheet" href="css/magnificpopup.css"/
+		
+
+
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive.css" rel="stylesheet">
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"></script>
+
+
+</head>
+
+
+<style>
+body {font-family: 'Varela Round', sans-serif;}
+
+      .blink {
+        animation: blinker 0.6s linear infinite;
+        color: #1c87c9;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: sans-serif;
+      }
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+      .blink-one {
+        animation: blinker-one 1s linear infinite;
+      }
+      @keyframes blinker-one {
+        0% {
+          opacity: 0;
+        }
+      }
+      .blink-two {
+        animation: blinker-two 1.4s linear infinite;
+      }
+      @keyframes blinker-two {
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+
+
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="img/coreimg/salad.png" alt="">
+    </div>
+    <body id="page-top">
+
+
+	
+      <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+
+                <a class="navbar-brand" href="#page-top"><img src="img/coreimg/logo.png" alt=""></a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#page-top">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#recipes">All Recipes</a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="joinUs()" >Blog</a></li>
+						<li class="nav-item"><a class="nav-link" href="#subscribe">Contact</a></li>
+
+		<div class="navbar-nav ml-auto action-buttons">
+			<div class="nav-item dropdown"id="myForm">
+						<a data-toggle="dropdown" class="nav-link dropdown-toggle mr-4" >Login</a>
+                <div class="dropdown-menu action-form">
+							<p class="hint-text">Sign in with your account</p>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Username" id="login" required="required">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" placeholder="Password" id="password"  required="required">
+						</div> 
+						<div class="form-group social-btn clearfix">
+							<a type="submit" class="btn btn-secondary facebook-btn " onclick="check2()">Register</a>
+							<a type="submit" class="btn btn-secondary twitter-btn float" onclick="check()">Login</a>
+						</div>
+							<div class="text-center mt-2">
+							<a href="#">Forgot Your password?</a>
+						</div>
+			
+                </div>
+			</div>
+			
+        </div>
+		
+		</ul>
+                </div>
+            </div>
+			</div>         
+        </nav>
+
+  <!-- ##### Hero Area Start ##### -->
+
+    <section class="hero-area">
+        <div class="hero-slides owl-carousel">
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/bg1.jpg);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
+                                <h2 data-animation="fadeInUp" data-delay="300ms">Delicios Homemade Burger</h2>
+                                <p data-animation="fadeInUp" data-delay="700ms">Delicious Burger – Thick or thin, made on the grill or stovetop, this is the best and easiest all-purpose recipe for perfect hamburger patties every time! These juicy, delicious homemade hamburgers are ready in less than 30 minutes and are a must-make for your next cookout.</p>
+                                <a onclick="joinUs()" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">See Full Recipe</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			  
+
+ 
+        </div>
+    </section>
+    <!-- ##### Hero Area End ##### -->
+
+       
+    <!-- ##### Top Catagory Area Start ##### -->
+    <section class="top-catagory-area section-padding-80-0">
+        <div class="container">
+            <div class="row">
+                <!-- Top Catagory Area -->
+                <div class="col-12 col-lg-6">
+                    <div class="single-top-catagory">
+                        <img src="img/bg-img/bg2.jpg" alt="">
+                        <!-- Content -->
+                        <div class="top-cta-content">
+                            <h3>Western Cuisine</h3>
+                            <h6>Simple &amp; Delicios</h6>
+                            <a  onclick="joinUs()"  class="btn delicious-btn">See Full Recipe</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Top Catagory Area -->
+                <div class="col-12 col-lg-6">
+                    <div class="single-top-catagory">
+                        <img src="img/bg-img/bg3.jpg" alt="">
+                        <!-- Content -->
+                        <div class="top-cta-content">
+                            <h3>Asian Cuisine</h3>
+                            <h6>Simple &amp; Delicious</h6>
+                            <a  onclick="joinUs()"  class="btn delicious-btn">See Full Recipe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Top Catagory Area End ##### -->
+	
+	
+
+ <!-- ##### Best Receipe Area Start ##### -->
+    <section class="best-receipe-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>The latest Hot Recipes</h3>
+                    </div>
+                </div>
+            </div>
+
+			
+			<div class="row">
+			
+<!-------------------------------------------------------->
+	
+                <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item lights wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="single-best-receipe-area mb-30">
+                        <img src="https://live.staticflickr.com/65535/52227266161_5c485fdc7e_b.jpg" width="1000" height="859" alt="r1">
+                        <div class="receipe-content">
+							<a href="#" data-toggle="modal" data-target="#quickview1"><h5 class="blink" >Sushi Easy Recipe</h5></a>
+							<div class="ratings">
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star"  aria-hidden="true"></i>
+                            </div>
+						</div>
+					</div>
+				</div>
+	
+	
+                <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item lights wow fadeInUpBig" data-wow-delay="0.3s">
+                    <div class="single-best-receipe-area mb-30">
+                        <img src="https://live.staticflickr.com/65535/52227266131_5592e5bf2d_b.jpg" width="1000" height="859" alt="r2">
+                        <div class="receipe-content">
+							<a href="#" data-toggle="modal" data-target="#quickview2"><h5 class="blink">Homemade Burger</h5></a>
+							
+							<div class="ratings">
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star"  aria-hidden="true"></i>
+                            </div>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+                <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item lights wow fadeInUpBig" data-wow-delay="0.4s">
+                    <div class="single-best-receipe-area mb-30">
+                        <img src="https://live.staticflickr.com/65535/52227747985_8e5f36fdd9_b.jpg" width="1000" height="859" alt="r3">
+                        <div class="receipe-content">
+							<h5 class="blink">Vegan Smoothie</h5>
+							</a>
+							<div class="ratings">
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                            </div>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+                <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item lights wow fadeInUpBig" data-wow-delay="0.5s">
+                    <div class="single-best-receipe-area mb-30">
+                        <img src="https://live.staticflickr.com/65535/52227536099_3a2034e67c_b.jpg" width="1000" height="859" alt="r4">
+                        <div class="receipe-content">
+							<a href="#" data-toggle="modal" data-target="#quickview4"><h5 class="blink">Calabasa soup</h5>
+							</a>
+							<div class="ratings">
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star"  aria-hidden="true"></i>
+                            </div>
+						</div>
+					</div>
+				</div>
+				
+				
+                <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item lights wow fadeInUpBig" data-wow-delay="0.6s">
+                    <div class="single-best-receipe-area mb-30">
+                        <img src="https://live.staticflickr.com/65535/52226258082_575d25c551_b.jpg" width="1000" height="859" alt="r5">
+                        <div class="receipe-content">
+							<a href="#" data-toggle="modal" data-target="#quickview5"><h5 class="blink">Homemade Breakfast</h5>
+							</a>
+							<div class="ratings">
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star"  aria-hidden="true"></i>
+                            </div>
+						</div>
+					</div>
+				</div>
+				
+				
+				          <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item lights wow fadeInUpBig" data-wow-delay="0.7s">
+                    <div class="single-best-receipe-area mb-30">
+                        <img src="https://live.staticflickr.com/65535/52227536024_0789374c44_b.jpg" width="1000" height="859" alt="r6">
+                        <div class="receipe-content">
+							<a href="#" data-toggle="modal" data-target="#quickview6"><h5 class="blink">Healthy Fruit Desert</h5>
+							</a>
+							<div class="ratings">
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+    </section>
+	
+	<!------------------------------------------------------------------------------------------------->
+	
+	<!-- ****** Quick View Modal Area Start ****** -->
+	
+	<section class="products-section bg-light" id="recipes">
+        <div class="modal fade" id="quickview1" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+							
+						
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52227266161_5c485fdc7e_b.jpg" width="1000" height="859" alt="r1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                            <h4 class="title">Sushi Easy Recipe</h4>
+											<input type="hidden" id="name1" value="sushieasyrecipe">
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </div>
+											<h5>Ingredients</h5>
+											<h6>For the rice</h6>
+											<ul>
+											<li>300g sushi rice</li>
+											<li>100ml rice wine vinegar</li>
+											<li>2 tbsp golden caster sugar</li>
+											</ul>
+											
+											<h6>For the Japanese mayonnaise</h6>
+											<ul>
+											<li>3 tbsp mayonnaise</li>
+											<li>1 tbsp  rice wine vinegar</li>
+											<li>1 tsp soy sauce</li>
+											</ul>
+											
+											<h6>For the sushi</h6>
+											<ul>
+											<li>25g bag nori (seaweed) sheets</li>
+											<li>choose from the following fillings: cucumber strips, smoked salmon, white crabmeat, canned tuna, red pepper, avocado, spring onion</li>
+											</ul>
+											
+											<h6>To serve with all styles of sushi</h6>
+											<ul>
+											<li>wasabi (optional - and fiery!)</li>
+											<li>pickled ginger</li>
+											<li>soy sauce</li>
+											</ul>
+											
+                                        </div>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>	
+				
+		<div class="modal fade" id="quickview2" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+					</button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+							
+						
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52227266131_5592e5bf2d_b.jpg" width="1000" height="859" alt="r2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                            <h4 class="title">Homemade Burger</h4>
+											<input type="hidden" id="name1" value="homemadeburger">
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </div>
+											<h5>Ingredients</h5>
+											<ul>
+											<li>½ tbsp olive oil</li>
+											<li>1 onion, peeled and finely chopped</li>
+											<li>1 x 500g pack British Beef Steak Mince 15% fat</li>
+											<li>1 tsp mixed dried herbs</li>
+											<li>1 egg, beaten</li>
+											<li>4 slices mature Cheddar (optional)</li>
+											<li>4 white rolls</li>
+											<li>few round lettuce leaves, torn</li>
+											<li>1 beef tomato, sliced</li>
+											<li>ketchup, to serve (optional)</li>
+											</ul>
+											
+                                        </div>
+            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+		<div class="modal fade" id="quickview3" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+					</button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+							
+						
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52227747985_8e5f36fdd9_b.jpg" width="1000" height="859" alt="r3">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                            <h4 class="title">Vegan Smoothie</h4>
+											<input type="hidden" id="name1" value="vegansmoothie">
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                            </div>
+											<h5>Ingredients</h5>
+											<ul>
+											<li>2 handfuls kale</li>
+											<li>½ avocado</li>
+											<li>½ lime, juice only</li>
+											<li>large handful frozen pineapple chunks</li>
+											<li>medium-sized chunk ginger</li>
+											<li>1 tbsp cashew nuts</li>
+											<li>1 banana, optional</li>						
+											</ul>
+											
+                                        </div>
+            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		<div class="modal fade" id="quickview4" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+					</button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+							
+						
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52227536099_3a2034e67c_b.jpg" width="1000" height="859" alt="r4">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                            <h4 class="title">Calabasa soup</h4>
+											<input type="hidden" id="name1" value="calabasasoup">
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star"  aria-hidden="true"></i>
+                                            </div>
+											<h5>Ingredients</h5>
+											<ul>
+											<li>2 tablespoons olive oil</li>
+											<li>3 pounds calabaza (can substitute Hubbard, butternut or acorn squash), seeded, peeled</li>
+											<li>1 medium ripe tomato, peeled, chopped (about 1 1/2 cups)</li>
+											<li>1/2 cup finely chopped red onion</li>
+											<li>1 can (12 fluid ounces) NESTLÉ® CARNATION® Evaporated Milk</li>
+											<li>1 teaspoon granulated sugar</li>
+											<li>1/2 teaspoon ground nutmeg</li>	
+											<li>1/2 teaspoon salt</li>	
+											<li>1/4 teaspoon ground white or black pepper</li>	
+											<li>Ground cinnamon</li>	
+											<li>Sour cream</li>	
+											</ul>
+											
+                                        </div>
+            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+		
+		<div class="modal fade" id="quickview5" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+					</button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+							
+						
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52226258082_575d25c551_b.jpg" width="1000" height="859" alt="r5">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                            <h4 class="title">Homemade Breakfast</h4>
+											<input type="hidden" id="name1" value="homemadebreakfast">
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star"  aria-hidden="true"></i>
+                                            </div>
+											<h5>Ingredients</h5>
+											<ul>
+											<li>1 tbsp rapeseed oil</li>
+											<li>140g white cabbage , finely chopped</li>
+											<li>2 spring onions , finely sliced</li>
+											<li>300g whole new potato</li>
+											<li>1 tbsp snipped chives</li>
+											<li>2 medium eggs , at room temperature</li>
+											<li>75g smoked salmon</li>	
+
+											</ul>
+											
+                                        </div>
+            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="modal fade" id="quickview6" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+					</button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+							
+						
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52227536024_0789374c44_b.jpg" width="1000" height="859" alt="r6">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                            <h4 class="title">Healthy Food Desert</h4>
+											<input type="hidden" id="name1" value="healthyfooddesert">
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                            </div>
+											<h5>Ingredients</h5>
+											<ul>
+											<li>1 tsp butter</li>
+											<li>1l semi-skimmed milk + 100ml</li>
+											<li>200g wholegrain rice</li>
+											<li>1 tsp mixed spice</li>
+											<li>1 tsp cinnamon</li>
+											<li>1 orange , finely zested</li>
+											<li>A grating of nutmeg</li>	
+											<li>1 tbsp orange segments</li>	
+											<li>honey and raisins, to serve</li>	
+
+											</ul>
+											
+                                        </div>
+            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+	</section>
+ 
+	
+	       <!-- ****** Quick View Modal Area End ****** -->
+
+       <!-- Best Recipe-->
+    <section id="recipes" class="cta-area bg-img bg-overlay" style="background-image: url(img/bg-img/bg4.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <!-- Cta Content -->
+                    <div class="cta-content text-center">
+                        <h2>Gluten Free Recipes</h2>
+                        <p>The life of the lake is not before the life of the bananas. Until the thermal layer of the employee. Before the very first layer of mourning and vengeful pain lay in the bed of the bed; Cras sed accumsan neque. To the Olympic, the bed or any other homework, the laughter of the lion element of the freestyle</p>
+                      <a onclick="joinUs()"  class="btn delicious-btn">Discover all the recipes</a>
+					  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### CTA Area End ##### -->
+
+ <!-- ##### Follow Us Instagram Area Start ##### -->
+    <div class="follow-us-instagram">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h5>Follow Us Instragram</h5>
+                </div>
+            </div>
+        </div>
+        <!-- Instagram Feeds -->
+        <div class="insta-feeds d-flex flex-wrap">
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="img/bg-img/insta1.jpg" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="img/bg-img/insta2.jpg" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="img/bg-img/insta3.jpg" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="img/bg-img/insta4.jpg" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="img/bg-img/insta5.jpg" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="img/bg-img/insta6.jpg" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <!-- Single Insta Feeds -->
+            <div class="single-insta-feeds">
+                <img src="img/bg-img/insta7.jpg" alt="">
+                <!-- Icon -->
+                <div class="insta-icon">
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Follow Us Instagram Area End ##### -->
+		
+ <!-- Signup-->
+        <section class="signup-section bg-black" >
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                        <h2 class="text-white mb-5">Subscribe to our newsletter</h2>
+                        <div class="form-signup d-flex flex-column flex-sm-row">
+                            <input class="form-control flex-fill me-0 me-sm-2 mb-3 mb-sm-0" id="inputEmail" type="email" placeholder="Enter email address..." required="required"/>
+							<a class="btn btn-primary" type="submit" onclick="check3()">Subscribe</a>               
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact-->
+        <section class="contact-section bg-black" id ="subscribe">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Address</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small text-black-50">10 Salisbury Road, Tsim Sha Tsui, Kowloon, Hong Kong</div>
+                                <div><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.573209477786!2d114.16837041474722!3d22.294151285326773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340400f30a2d9eaf%3A0xbdf3f37ea2f0375a!2z5bCW5rKZ5ZKA5qKz5aOr5be05Yip6YGTMTDomZ_pppnmuK_mlofljJbkuK3lv4M!5e0!3m2!1szh-TW!2shk!4v1628524764689!5m2!1szh-TW!2shk" width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-envelope text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Email</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small text-black-50"><a href="mailto: spacewalkhk@gmail.com">spacewalkhk@gmail.com</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Phone</h4>
+                                <hr class="my-4 mx-auto" />
+                                <div class="small text-black-50">(852) 2721 7489</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social d-flex justify-content-center">
+                    <a class="mx-2" href="https://twitter.com/i/flow/login"><i class="fab fa-twitter"></i></a>
+                    <a class="mx-2" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a class="mx-2" href="https://github.com/"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Delicious Food Blog 2022</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
+    <!-- ##### All Javascript Files ##### -->
+
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+	<script src="js/scripts.js"></script>
+
+    </body>
+</html>

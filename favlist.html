@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"></script>
+
+<script>
+
+	function openForm() {
+	document.getElementById("myForm").style.display = "block";
+	}
+
+	function closeForm() {
+	document.getElementById("myForm").style.display = "nonfole";
+	}
+
+</script>	
+
+
+<script>
+$(document).ready(function () {
+    
+	var logid = localStorage.getItem("loginok");
+	
+    var mydata=logid
+    if (logid == "" || logid === null) {
+            alert("Access Denied! Please login!");
+
+            location.replace("/index");
+        } else {
+        }
+		
+        $(".addfav").click(function () {
+		var content = $(this).parent().find('label').text();
+		var content_item = '';
+		var content_item1 = '';
+		var mydata="login="+logid+"&favlist="+content;
+		
+		if( localStorage.getItem(logid) == null ) {
+			content_item = content_item + content;
+			//localStorage.setItem(logid, content_item);
+		}
+		else{
+			content_item1 = content_item + "," + content;
+			//localStorage.setItem(logid, content_item1);
+		}
+		
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:9999/favlist',
+                dataType: "text",
+                data: mydata,
+                success: function (data) {
+                    if (data == "Success") {
+                        alert("Added!");
+                        
+                        location.herf = "/favlist";
+
+                    }    
+                    else  {
+                        alert("Please Login!");
+                        return;
+                    }
+
+
+
+                    alert(data);
+                    console.log('gogo');
+                    console.log(data);
+                },
+				
+				error: function(xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
+            });
+        });
+		
+		
+		});
+</script>
+
+
+<script>
+function delAcc() {
+$(document).ready(function () {
+    
+	var logid = localStorage.getItem("loginok");
+	
+    var mydata=logid
+    if (logid == "" || logid === null) {
+            alert("Access Denied! Please login!");
+
+            location.replace("/index");
+        } else {
+		
+			$.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:9999/userpage',
+			dataType:"text",
+			data:mydata,
+                success: function(data) { 
+                    //alert(data);
+                    var obj = JSON.parse(data);
+                    console.log(obj)
+
+                    
+				$("#name").html(obj[0].login);//make a for loop to fill in data
+
+                },
+            
+                error: function(xhr, status, error) {
+                    console.log('Error: ' + error.message);
+                }
+            });
+
+
+		}
+		
+		
+        $(".deleteac").click(function () {
+	 
+     var mydata = logid;
+     
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:9999/deleteac',
+                dataType: "text",
+                data: mydata,
+                success: function (data) {
+                    if (data == "Success") {
+                        alert("Delete...");
+                        localStorage.removeItem("loginok", logid);
+                        location.reload()
+                        location.herf = "/index";
+
+                    }    
+                    else  {
+ 
+                    }
+
+
+                    alert(data);
+                    console.log('Delete');
+                    console.log(data);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error: ' + error.message);
+                }
+            });
+
+
+        });
+		
+		
+});
+
+</script>
+
+
+
+<script>
+		function callLogout() {
+		alert("Hope to see you again!");
+		location.href="/index";
+		}
+</script>
+
+
+
+<script>
+// Prevent dropdown menu from closing when click inside the form
+$(document).on("click", ".action-buttons .dropdown-menu", function(e){
+	e.stopPropagation();
+});
+</script>
+
+
+
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  	<!-- Title -->
+        <title>Delicious - Food Blog | All recipes</title>
+
+	<!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="img/coreimg/favicon.ico"/>
+
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
+
+        <!-- Google fonts-->     
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		
+	<!-- Core Stylesheet -->
+		<link rel="stylesheet" href="css/style3.css" />
+		<link rel="stylesheet" href="css/styles.css" />
+		<link rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="css/corestyle.css"/>
+		<link rel="stylesheet" href="css/owlcarousel.css"/>
+		<link rel="stylesheet" href="css/themifyicons.css"/>
+		<link rel="stylesheet" href="css/magnificpopup.css"/
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive.css" rel="stylesheet">
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"></script>
+
+
+
+</head>	
+
+<style>
+body {font-family: 'Varela Round', sans-serif;}
+
+      .blink {
+        animation: blinker 0.6s linear infinite;
+        color: #1c87c9;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: sans-serif;
+      }
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+      .blink-one {
+        animation: blinker-one 1s linear infinite;
+      }
+      @keyframes blinker-one {
+        0% {
+          opacity: 0;
+        }
+      }
+      .blink-two {
+        animation: blinker-two 1.4s linear infinite;
+      }
+      @keyframes blinker-two {
+        100% {
+          opacity: 0;
+        }
+      }
+	  
+	  
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: auto;
+}
+
+
+
+</style>
+	
+
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="img/coreimg/salad.png" alt="">
+    </div>
+    <body id="page-top">
+
+
+	
+      <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+
+                <a class="navbar-brand" href="/hmpage"><img src="img/coreimg/logo.png" alt=""></a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/hmpage">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#page-top">All Recipes</a></li>
+						<li class="nav-item"><a class="nav-link" href="/cart">Favorites</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/hmpage#subscribe">Contact</a></li>
+				
+		<div class="navbar-nav ml-auto action-buttons">
+			<div class="nav-item dropdown"id="myForm">
+					<a data-toggle="dropdown" class="nav-link dropdown-toggle mr-4" ><i class="fa fa-user-circle " aria-hidden="true" style="font-size:24px"></i></a>
+                <div class="dropdown-menu action-form">
+							<h5 class="hint-text">Logout the page?</h5>
+							<div class="form-group social-btn clearfix margin-auto text-center">
+							<a type="submit" class="btn btn-secondary facebook-btn " href="javascript:void(0);" onclick="callLogout()">Logout</a>
+						</div>
+						
+						<h5 class="hint-text">Delete Account?</h5>		
+						<div class="form-group social-btn clearfix margin-auto text-center">
+							<a type="submit" class="btn btn-secondary twitter-btn deleteac" id="del" href="/userpage">Confirm</a>
+						</div>
+						
+						<div class="text-center mt-2">
+							<a href="#">Forgot Your password?</a>
+						</div>		
+                </div>
+			</div>
+        </div>
+		
+		</ul>
+                </div>
+            </div>
+			</div>         
+        </nav>
+
+	        <!-- arrival-->
+<!-- ****** Quick View Modal Area Start ****** -->
+	<section class="products-section bg-light" id="products">
+        <div class="modal fade" id="quickview1" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52241386825_acf8a09b79_o.png" width="686" height="623" alt="Beef &amp; vegetable casserole">
+		
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Beef & vegetable casserole</h4>										   
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Beef and vegetable casserole</label>
+												<button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+												
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>2 celery sticks, thickly sliced</li>
+											<li>1 onion, chopped</li>
+											<li>2 really big carrots, halved lengthways then very chunkily sliced</li>
+											<li>5 bay leaves</li>
+											<li>2 thyme sprigs, 1 whole and 1 leaves picked</li>
+											<li>1 tbsp vegetable oil</li>											
+											<li>1 tbsp butter</li>
+											<li>2 tbsp plain flour</li>
+											<li>2 tbsp tomato purée</li>
+											<li>2 tbsp Worcestershire sauce</li>
+											<li>2 beef stock cubes, crumbled</li>
+											<li>850g stewing beef (featherblade or brisket works nicely), cut into nice large chunks</li>
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											<h5>Method</h5>	
+											<a href="https://drive.google.com/file/d/1s0XUgy1ln-W-OSIuxRllmEdSXV-hxBMT/view?usp=sharing" class="link-info" target="_blank"><i class="fa fa-download"" aria-hidden="true"></i> Click here to download full recipe</a>
+											<h6>Step 1</h6>							
+											<li>Heat oven to 160C/140C fan/gas 3 and put the kettle on.</li>
+											<h6>Step 2</h6>		
+											<li>Put 2 thickly sliced celery sticks, 1 chopped onion, 2 chunkily sliced carrots, 5 bay leaves and 1 whole thyme sprig in a flameproof casserole dish with 1 tbsp vegetable oil and 1 tbsp butter.</li>
+											<h6>Step 3</h6>
+											<li>Soften for 10 mins, then stir in 2 tbsp plain flour until it doesn’t look dusty anymore, followed by 2 tbsp tomato purée, 2 tbsp Worcestershire sauce and 2 crumbled beef stock cubes.</li>
+											<h6>Step 4</h6>
+											<li>Gradually stir in 600ml hot water, then tip in 850g stewing beef and bring to a gentle simmer.</li>
+											<h6>Step 5</h6>
+											<li>Cover and put in the oven for 2hrs 30 mins, then uncover and cook for 30mins – 1hr more until the meat is really tender and the sauce is thickened.</li>
+											<h6>Step 6</h6>
+											<li>Garnish with the picked leaves of the remaining thyme sprig.</li>
+											
+											
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+			
+			
+			
+		  <div class="modal fade" id="quickview2" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52240905933_06c775e0cd_o.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Easy paella</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Easy paella</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>1 tbsp olive oil</li>
+											<li>1 onion, chopped</li>
+											<li>1 tsp each hot smoked paprika and dried thyme</li>
+											<li>300g paella or risotto rice</li>
+											<li>3 tbsp dry sherry or white wine (optional)</li>
+											<li>400g can chopped tomatoes with garlic</li>
+											<li>900ml chicken stock</li>
+											<li>400g frozen seafood mix , defrosted</li>
+											<li>1 lemon, ½ juiced, ½ cut into wedges</li>
+											<li>handful of flat-leaf parsley, roughly chopped</li>
+											
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											<h5>Method</h5>		
+											<h6>Step 1</h6>							
+											<li>Heat the olive oil in a large frying pan or wok. Add the onion and soften for 5 mins.</li>
+											<h6>Step 2</h6>		
+											<li>Add the smoked paprika, thyme and paella rice, stir for 1 min, then splash in the sherry, if using. Once evaporated, stir in the chopped tomatoes and chicken stock.</li>						
+											<h6>Step 3</h6>
+											<li>Season and cook, uncovered, for about 15 mins, stirring now and again until the rice is almost tender and still surrounded with some liquid.</li>
+											<h6>Step 4</h6>
+											<li>Stir in the seafood mix and cover with a lid. Simmer for 5 mins, or until the seafood is cooked through and the rice is tender. Squeeze over the lemon juice, scatter over the parsley and serve with the lemon wedges.</li>
+
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+			
+			
+			
+		  <div class="modal fade" id="quickview3" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52241386740_c6709a0367_o.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Cottage pie</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Cottage pie</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>3 tbsp olive oil</li>
+											<li>1¼kg beef mince</li>
+											<li>2 onions, finely chopped</li>
+											<li>3 carrots, chopped</li>
+											<li>3 celery sticks, chopped</li>
+											<li>2 garlic cloves, finely chopped</li>
+											<li>3 tbsp plain flour</li>
+											<li>1 tbsp tomato purée</li>
+											<li>large glass of red wine (optional)</li>
+											<li>850ml beef stock</li>
+											<li>4 tbsp Worcestershire sauce</li>
+											<li>a few thyme sprigs</li>
+											<li>2 bay leaves</li>
+											</div>
+											<br></br>
+											<div class="col-xl">
+                                            <h5>For the mash</h5>							
+											<li>1.8kg potatoes, chopped</li>
+											<li>225ml milk</li>
+											<li>25g butter</li>
+											<li>200g strong cheddar, grated</li>
+											<li>freshly grated nutmeg</li>
+											</div>
+											<br></br>
+											<div class="col-xl">
+											<h5>Method</h5>							
+											<li>click the name to download full recipe</li>
+											
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+  <div class="modal fade" id="quickview4" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52241187129_7d440b56e7_o.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Easy fish pie recipe</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Easy fish pie recipe</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>1kg Maris Piper potatoes, peeled and halved</li>
+											<li>400ml milk, plus a splash</li>
+											<li>25g butter, plus a knob</li>
+											<li>25g plain flour</li>
+											<li>4 spring onions, finely sliced</li>
+											<li>1 x pack fish pie mix (cod, salmon, smoked haddock etc, weight around 320g-400g depending on pack size)</li>	
+											<li>1 tsp Dijon or English mustard</li>	
+											<li>½ a 25g pack or a small bunch chives, finely snipped</li>		
+											<li>handful frozen sweetcorn</li>													
+											<li>handful grated cheddar</li>													
+											<li>handful frozen petits pois</li>													
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											<h5>Method</h5>		
+											<h6>Step 1</h6>							
+											<li>Heat the oven to 200C/fan 180C/gas mark 6.</li>
+											<h6>Step 2</h6>		
+											<li>Put 1kg potatoes, peeled and halved, in a saucepan and pour over enough water to cover them. Bring to the boil and then simmer until tender.</li>
+											<h6>Step 3</h6>	
+											<li>When cooked, drain thoroughly and mash with a splash of milk and a knob of butter. Season with ground black pepper.</li>
+											<h6>Step4</h6>	
+											<li>Put 25g butter, 25g plain flour and 4 finely sliced spring onions in another pan and heat gently until the butter has melted, stirring regularly. Cook for 1-2 mins.</li>
+											<h6>Step 5</h6>												
+											<li>Gradually whisk in 400ml milk using a balloon whisk if you have one. Bring to the boil, stirring to avoid any lumps and sticking at the bottom of the pan. Cook for 3-4 mins until thickened.</li>												
+											<h6>Step 6</h6>	
+											<li>Take off the heat and stir in 320g-400g mixed fish, 1 tsp Dijon or English mustard, a small bunch of finely snipped chives, handful of sweetcorn and handful of petits pois. Spoon into an ovenproof dish or 6-8 ramekins.</li>
+											<h6>Step 7</h6>	
+											<li>Spoon the potato on top and sprinkle with a handful of grated cheddar cheese.</li>
+											<h6>Step 8</h6>	
+											<li>Pop in the oven for 20-25 mins or until golden and bubbling at the edges. Alternatively, cover and freeze the pie or mini pies for another time.</li>
+
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+			
+	  <div class="modal fade" id="quickview5" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52239914657_be03814f03_z.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Toad-in-the-hole</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Toad-in-the-hole</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>	
+											<li>12 chipolatas</li>
+											<li>1 tbsp sunflower oil</li>
+											<h6>For the batter</h6>
+											<li>140g plain flour</li>
+											<li>2 eggs</li>
+											<li>175ml semi-skimmed milk</li>
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											<h5>Method</h5>	
+											<h6>Step 1</h6>							
+											<li>Heat the oven to 220C/200C fan/gas 7. Put the chipolatas in a 20 x 30cm roasting tin with the oil and bake for 15 mins until browned.</li>
+											<h6>Step 2</h6>
+											<li>Meanwhile, make the batter. Tip the flour into a bowl with ½ tsp salt, make a well in the middle and crack the eggs into it. Use an electric whisk to mix it together, then slowly add the milk, whisking all the time. Leave to stand until the sausages are nice and brown.</li>
+											<h6>Step 3</h6>
+											<li>Remove the sausages from the oven – be careful because the fat will be sizzling hot – but if it isn’t, put the tin on the hob for a few minutes until it is.</li>
+											<h6>Step 4</h6>
+											<li>Pour in the batter mix, transfer to the top shelf of the oven, then cook for 25-30 mins, until risen and golden. Serve with gravy and your favourite veg.</li>
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+			
+		 <div class="modal fade" id="quickview6" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52241186979_55d88e885f_z.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Ultimate spaghetti carbonara recipe</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Ultimate spaghetti carbonara recipe</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>	
+											<li>100g pancetta</li>
+											<li>50g pecorino cheese</li>
+											<li>50g parmesan</li>
+											<li>3 large eggs</li>
+											<li>350g spaghetti</li>
+											<li>2 plump garlic cloves, peeled and left whole</li>
+											<li>50g unsalted butter</li>
+											<li>sea salt and freshly ground black pepper</li>
+																																	
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											<h5>Method</h5>
+											<li>click the name to download full recipe</li>											
+											
+											
+									
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+ <div class="modal fade" id="quickview7" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52243334130_4cacd9fb86_c.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Butternut squash soup</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Butternut squash soup</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>1.5kg/3lb 5oz peeled and deseeded butternut squash, cut into 3cm/1¼in cubes (see tip)</li>
+											<li>1 large onion, roughly chopped</li>
+											<li>2 medium carrots, peeled and chopped</li>
+											<li>1 red pepper, deseeded and cut into cubes</li>
+											<li>4 tbsp olive oil</li>
+											<li>1 tbsp clear honey (optional)</li>
+											<li>5cm/2in piece fresh root ginger, peeled and chopped</li>
+											<li>1.5 litres/2½ pints vegetable stock</li>
+											<li>salt and freshly ground black pepper</li>
+											
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											<h5>Method</h5>	
+											<h6>Step 1</h6>							
+											<li>Preheat the oven to 200C/180C Fan/Gas 6.</li>
+											<h6>Step 2</h6>							
+											<li>Tip the prepared squash into a large, resealable freezer bag with the onion, carrots and red pepper. Add half the oil and salt and pepper and toss everything together until the vegetables are evenly coated. Tip into a large roasting tin and spread out to form a single layer.</li>
+											<h6>Step 3</h6>							
+											<li>Roast in the oven for 40–45 minutes, or until tender and tinged brown. Drizzle over the honey, if using, 5 minutes before the end of cooking.</li>
+											<h6>Step 4</h6>							
+											<li>Place the large, deep-sided saucepan over a medium heat, add the remaining oil and, when it is hot, add the ginger and fry for a minute. Pour in the stock and bring to the boil, then stir in the roasted vegetables and add salt and pepper.</li>
+											<h6>Step 5</h6>							
+											<li>Remove the saucepan from the heat and, using a hand blender, blend the mixture until smooth. Return to the heat to warm through and serve hot with crusty bread.</li>
+
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+ <div class="modal fade" id="quickview8" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52243333975_691a6a4ba1_c.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Parsnip and apple soup</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Parsnip and apple soup</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>50g butter</li>
+											<li>1 onion, finely chopped</li>
+											<li>2 cloves garlic, finely chopped</li>
+											<li>500g parnsips, chopped</li>
+											<li>2 apples, cored and chopped</li>
+											<li>1 litre chicken stock</li>
+											<li>50g crème fraîche</li>
+											<li>chives, to garnish</li>
+											
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											 <h5>Method</h5>		
+											<h6></h6>							
+											<li>Melt the butter in a pan and add the finely chopped onion and a pinch of salt, and cook for 10 minutes until soft. Tip in the chopped cloves of garlic, chopped parsnips and chopped apples, and cook for 5 minutes, tossing in the butter, before pouring in the chicken stock and simmering for 30 minutes until the parsnips are completely soft. Use a stick blender to whizz until completely smooth. Stir through the crème fraîche, blend briefly again and spoon into bowls, then swirl in a little more crème fraîche, snip over some chives and a sprinkle of black pepper.</li>
+									
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+ <div class="modal fade" id="quickview9" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52242841601_61490f0905_c.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Pea and ham soup</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Pea and ham soup</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>knob of butter</li>
+											<li>1 onion, chopped</li>
+											<li>1 medium potato, peeled and diced</li>
+											<li>1l ham or pork stock (see 'Try', below)</li>
+											<li>500g frozen petit pois</li>
+											<li>300g thickly sliced ham, trimmed of any fat and diced</li>
+											
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											 <h5>Method</h5>		
+											<h6>Step 1</h6>							
+											<li>Heat a knob of butter in a saucepan and when lightly foaming gently cook 1 chopped onion until softened, but not coloured.</li>
+											<h6>Step 2</h6>							
+											<li>Tip in 1 peeled and diced medium potato and stir to coat in butter, then pour over 1l ham or pork stock. Simmer until softened.</li>
+											<h6>Step 3</h6>							
+											<li>Tip in 500g frozen petit pois and bring back to the boil. Cook for a couple of mins.</li>
+											<h6>Step 4</h6>							
+											<li>Remove from the heat and blend until smooth. Stir in 300g diced ham and serve.</li>
+											
+									
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+ <div class="modal fade" id="quickview10" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52241866622_585bcf69d7_c.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Coconut yoghurt cake</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Coconut yoghurt cake</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>200g unsalted butter, at room temperature, chopped</li>
+											<li>2 tsp finely grated lime zest, plus extra to serve</li>
+											<li>3/4 cup (165g) caster sugar</li>
+											<li>3 eggs, at room temperature</li>
+											<li>60g fine semolina</li>
+											<li>1/2 cup (50g) almond meal</li>
+											<li>1 1/2 cups (225g) self-raising flour, sifted</li>
+											<li>3/4 cup (45g) shredded coconut</li>
+											<li>180g natural yoghurt</li>
+											<li>120ml lime juice</li>
+											<li>Whipped cream, to serve</li>
+											<h6>SYRUP</h6>
+											<li>370g caster sugar</li>
+											<li>Finely grated zest of 2 limes plus 1 cup (250ml) lime juice</li>
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											<h5>Method</h5>	
+											<li>click the name to download full recipe</li>
+											 
+									
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ <div class="modal fade" id="quickview11" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52242856878_a643d57f12_c.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Easy lemon meringue pie</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Easy lemon meringue pie</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>click the name to download full recipe</li>
+											
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											 <h5>Method</h5>		
+									
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div class="modal fade" id="quickview12" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                    <div class="modal-body">
+                        <div class="quickview_body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-lg-5">
+                                        <div class="quickview_pro_img">
+                                            <img src="https://live.staticflickr.com/65535/52241866692_5672275807_c.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-7">
+                                        <div class="quickview_pro_des">
+                                           <h4 class="title">Burnt butter, almond and honey cake</h4>
+                                            <div class="top_seller_product_rating mb-15">
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" style="color:Orange;" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+											</div>	
+										  
+										<!-- Add to Cart Form -->
+										<form class="cart" method="post">                           
+                                            <!-- Wishlist  -->
+                                            <div class="modal_pro_wishlist">
+												<label href="" hidden for="scales">Burnt butter, almond and honey cake</label><button class="addfav" ><img src="\img\heart.png" width="35" height="35" ></button>
+											</div>
+                                        </form>			
+										
+											<div class="col-xl">
+                                            <h5>Ingredients</h5>							
+											<li>180g unsalted butter, chilled, chopped</li>
+											<li>5 eggs</li>
+											<li>1/3 cup (75g) caster sugar</li>
+											<li>1/2 cup (180g) honey, plus 60g extra to drizzle</li>
+											<li>2 tsp vanilla bean paste</li>
+											<li>2 1/2 cups (250g) almond meal</li>	
+											<li>2/3 cup (100g) gluten-free plain flour</li>		
+											<li>2/3 tsp baking powder</li>
+											<li>Finely grated zest of 2 limes, juice of 1</li>
+											<li>100g almonds, chopped</li>
+											<li>Icing sugar, to serve</li>
+											</div>
+											<br></br>
+											
+											<div class="col-sm" > 
+											 <h5>Method</h5>		
+											<h6>Step 1</h6>							
+											<li>Preheat oven to 160°C. Grease a 20cm x 30cm cake pan and line the base and sides with baking paper.</li>
+											<h6>Step 2</h6>		
+											<li>Place butter in a saucepan and cook over medium-high heat for 5 minutes or until nut brown. Remove from heat and cool to room temperature.</li>
+											<h6>Step 3</h6>
+											<li>Place eggs, sugar, vanilla and half the honey in a stand mixer with the whisk attachment and whisk for 5 minutes or until pale and doubled in volume. Fold in almond meal, flour, baking powder, lime zest and juice and a pinch of salt flakes. Pour in two-thirds of burnt butter (stir butter well before adding) and fold to combine. Pour into prepared pan and smooth top.</li>
+											<h6>Step 4</h6>
+											<li>Combine chopped almonds, remaining burnt butter, remaining 90g honey and a pinch of salt flakes in a bowl. Mix well then scatter evenly over batter. Bake on middle shelf, turning occasionally, for 40-45 minutes until golden brown and the centre springs back when lightly pressed. Drizzle over extra honey and cool on a wire rack in pan. Serve at room temperature.</li>
+									
+											</div>
+										</div>										  
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+	</section>
+
+<!-- ****** Quick View Modal Area End ****** -->
+
+
+
+  <!-- ****** All recipes ****** -->
+     <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+					<div class="breadcumb-text text-center">
+                        <h2>All Recipes</h2>
+                    </div>
+                </div>
+            </div>
+        </div>  
+	</div>
+
+  
+			<div class="karl-projects-menu mt-30 mb-30">
+                <div class="text-center portfolio-menu">				
+                    <button class="btn active" data-filter="*">ALL</button>
+                    <button class="btn" data-filter=".western">WESTERN</button>
+                    <button class="btn" data-filter=".asian">ASIAN</button>
+					<button class="btn" data-filter=".main">MAIN</button>
+                    <button class="btn" data-filter=".dessert">DESSERT</button>
+                    <button class="btn" data-filter=".veggies">VEGGIES</button>
+                    <button class="btn" data-filter=".soup">SOUP</button>
+                </div>
+			</div>
+
+			<div class="container">
+                <div class="row karl-new-arrivals">
+
+  <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item western main wow fadeInUpBig" data-wow-delay="0.2s" >
+                        <!-- Product Image -->
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52241386825_acf8a09b79_o.png" width="686" height="623" alt="Beef &amp; vegetable casserole">
+                       <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview1"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area ">
+				 <div class="receipe-content">
+						<a href="#" data-toggle="modal" data-target="#quickview1"><h5 class="blink" >Beef & vegetable casserole</h5></a>
+					</div>
+				</div>
+
+				</div>
+
+	
+	<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item western main wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52240905933_06c775e0cd_o.png" width="686" height="623" alt="Easy paella">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview2"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+						<div class="single-best-receipe-area">
+				 <div class="receipe-content">
+						<a href="#" data-toggle="modal" data-target="#quickview2"><h5 class="blink" >Easy paella</h5></a>
+					</div>
+				</div>
+				</div>
+	
+	
+	<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item western main wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52241386740_c6709a0367_o.png" width="686" height="623" alt="Cottage pie">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview3"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area">
+				 <div class="receipe-content">
+						<a href="https://drive.google.com/file/d/1W7GWoAS_dPFjFcez7JjNiOoGEyhz9Jjg/view?usp=sharing" target="_blank" class="link-info"><h5 class="blink" >Cottage pie <i class="fa fa-download" aria-hidden="true"></i></h5></a>						  
+					</div>
+				</div>
+				</div>
+	
+	
+		<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item western main wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52241187129_7d440b56e7_o.png" width="686" height="623" alt="Easy fish pie recipe">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview4"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="#" data-toggle="modal" data-target="#quickview4"><h5 class="blink" >Easy fish pie recipe</h5></a>
+					</div>
+				</div>
+				</div>
+				
+		<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item western main wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52239914657_be03814f03_z.jpg" width="686" height="623" alt="Toad-in-the-hole"" width="686" height="623" alt="">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview5"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="#" data-toggle="modal" data-target="#quickview5"><h5 class="blink" >Toad-in-the-hole</h5></a>
+					</div>
+				</div>
+				</div>			
+				
+						<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item western main wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52241186979_55d88e885f_z.jpg" width="640" height="582" alt="Ultimate spaghetti carbonara recipe"" width="686" height="623" alt="">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview6"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="https://drive.google.com/file/d/1htiFPcaaPIjqyBPrrTIO9vFbODNdSIzs/view?usp=sharing"  target="_blank" class="link-info"><h5 class="blink" >Ultimate spaghetti carbonara recipe <i class="fa fa-download" aria-hidden="true"></i></h5></a>
+						
+					</div>
+				</div>
+				</div>			
+	
+
+	<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item soup wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52243334130_4cacd9fb86_c.jpg" width="686" height="623" alt="Butternut squash soup">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview7"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="#" data-toggle="modal" data-target="#quickview7"><h5 class="blink" >Butternut squash soup</h5></a>
+					</div>
+				</div>
+				</div>
+				
+				
+	<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item soup wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52243333975_691a6a4ba1_c.jpg" width="686" height="623" alt="Parsnip and apple soup">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview8"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="#" data-toggle="modal" data-target="#quickview8"><h5 class="blink" >Parsnip and apple soup</h5></a>
+					</div>
+				</div>
+				</div>
+
+				
+	<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item soup wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52242841601_61490f0905_c.jpg" width="686" height="623" alt="Pea and ham soup">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview9"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="#" data-toggle="modal" data-target="#quickview9"><h5 class="blink" >Pea and ham soup</h5></a>
+					</div>
+				</div>
+				</div>
+
+
+	<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item dessert wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52241866622_585bcf69d7_c.jpg" width="686" height="623" alt="Coconut yoghurt cake">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview10"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="https://drive.google.com/file/d/1htiFPcaaPIjqyBPrrTIO9vFbODNdSIzs/view?usp=sharing" target="_blank" class="link-info"><h5 class="blink" >Coconut yoghurt cake <i class="fa fa-download" aria-hidden="true"></i></h5></a>
+					</div>
+				</div>
+				</div>
+
+	<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item dessert wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52242856878_a643d57f12_c.jpg" width="686" height="623" alt="Easy lemon meringue pie">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview11"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="https://drive.google.com/file/d/1BiaDw8BvH8JecJhJkcbMq6woM7xUeOq9/view?usp=sharing" target="_blank" class="link-info"><h5 class="blink" >Easy lemon meringue pie <i class="fa fa-download" aria-hidden="true"></i></h5></a>
+					</div>
+				</div>
+				</div>
+
+	<!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item dessert wow fadeInUpBig" data-wow-delay="0.2s" >
+                    <div class="product-img">
+                        <img src="https://live.staticflickr.com/65535/52241866692_5672275807_c.jpg" width="686	" height="623" alt="Burnt butter, almond and honey cake">
+                        <div class="product-quicview">
+							<a href="#" data-toggle="modal" data-target="#quickview12"><i class="fa fa-info"></i></a>
+						</div>
+					</div>
+			<div class="single-best-receipe-area mb-20">
+				 <div class="receipe-content">
+						<a href="#" data-toggle="modal" data-target="#quickview12"><h5 class="blink" >Burnt butter, almond and honey cake</h5></a>
+					</div>
+				</div>
+				</div>
+				
+
+
+			</div>
+		</div>	
+    </section>
+	
+	
+	
+
+
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Your Website 2021</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+		
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+  <script>
+
+	function openForm() {
+	document.getElementById("myForm").style.display = "block";
+	}
+
+	function closeForm() {
+	document.getElementById("myForm").style.display = "nonfole";
+	}
+
+  </script>	
+
+<script>
+		$(document).ready(function () {
+    
+	var logid = localStorage.getItem("loginok");
+	
+    if (logid == "" || logid === null) {
+            alert("Access Denied! Please login!");
+
+            location.replace("/index");
+        } 
+		
+
+        $(".addfav").click(function () {
+		var content = $(this).parent().find('label').text();
+		var content_item = '';
+		var content_item1 = '';
+		var mydata="login="+logid+"&favlist="+content;
+		
+		if( localStorage.getItem(logid) == null ) {
+			content_item = content_item + content;
+			//localStorage.setItem(logid, content_item);
+		}
+		else{
+			content_item1 = content_item + "," + content;
+			//localStorage.setItem(logid, content_item1);
+		}
+		
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:9999/favlist',
+                dataType: "text",
+                data: mydata,
+                success: function (data) {
+                    if (data == "Success") {
+                        alert("Added!");
+                        
+                        location.herf = "/favlist";
+
+                    }    
+                    else  {
+                        alert("Please login!");
+                        return;
+                    }
+
+
+
+                    alert(data);
+                    console.log('gogo');
+                    console.log(data);
+                },
+				
+				error: function(xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
+            });
+        });
+		
+		
+		});
+</script>
+
+
+
+<script>
+function delAcc() {
+$(document).ready(function () {
+    
+	var logid = localStorage.getItem("loginok");
+	
+    var mydata=logid
+    if (logid == "" || logid === null) {
+            alert("Access Denied! Please login!");
+
+            location.replace("/index");
+        } else {
+        
+	
+		
+			$.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:9999/userpage',
+			dataType:"text",
+			data:mydata,
+                success: function(data) { 
+                    //alert(data);
+                    var obj = JSON.parse(data);
+                    console.log(obj)
+
+                    
+				$("#name").html(obj[0].login);//make a for loop to fill in data
+
+                },
+            
+                error: function(xhr, status, error) {
+                    console.log('Error: ' + error.message);
+                }
+            });
+
+
+		}
+		
+		
+        $(".deleteac").click(function () {
+	 
+     var mydata = logid;
+     
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:9999/deleteac',
+                dataType: "text",
+                data: mydata,
+                success: function (data) {
+                    if (data == "Success") {
+                        alert("Delete...");
+                        localStorage.removeItem("loginok", logid);
+                        location.reload()
+                        location.herf = "/index";
+
+                    }    
+                    else  {
+ 
+                    }
+
+
+                    alert(data);
+                    console.log('Delete');
+                    console.log(data);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error: ' + error.message);
+                }
+            });
+
+
+        });
+		
+		
+});
+
+</script>
+
+<script>
+function myComment() {
+	var name=$("#name").val();
+	var email=$("#email").val();
+	var mymessage=$("#mymessage").val();
+	var mycomment="name="+name+"&email="+email+"&mymessage="+mymessage;
+	 console.log(mycomment);
+	 
+	if(email ==="" || mymessage===""){
+	alert("Please input all information!");
+		return;
+	}else {		
+		alert("Thank you for your comment!");
+
+	}
+	 
+	 $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:9999/commentPage',
+			dataType:"text",
+			data:mycomment,
+			success: function(data) { 
+				alert(data);
+                console.log('gogo');
+                console.log(data); 
+				
+	        },
+            
+            error: function(xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
+        });
+	 
+	 
+}
+</script>
+
+<script>
+		function callLogout() {
+		alert("Hope to see you again!");
+		location.href="/index";
+		}
+</script>
+
+
+<script>
+// Prevent dropdown menu from closing when click inside the form
+$(document).on("click", ".action-buttons .dropdown-menu", function(e){
+	e.stopPropagation();
+});
+</script>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  	<!-- Title -->
+        <title>Delicious - Food Blog | Blog</title>
+
+	<!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="img/coreimg/favicon.ico"/>
+
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
+        <!-- Google fonts-->     
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		
+	<!-- Core Stylesheet -->
+		<link rel="stylesheet" href="css/style3.css" />
+		<link rel="stylesheet" href="css/styles.css" />
+		<link rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="css/corestyle.css"/>
+		<link rel="stylesheet" href="css/owlcarousel.css"/>
+		<link rel="stylesheet" href="css/themifyicons.css"/>
+		<link rel="stylesheet" href="css/magnificpopup.css"/
+		
+
+
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive.css" rel="stylesheet">
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"></script>
+
+
+</head>
+
+
+<style>
+body {font-family: 'Varela Round', sans-serif;}
+
+    </style>
+
+
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="img/coreimg/salad.png" alt="">
+    </div>
+    <body id="page-top">
+
+
+	
+      <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+
+                <a class="navbar-brand" href="/hmpage"><img src="img/coreimg/logo.png" alt=""></a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/hmpage">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/favlist">All Recipes</a></li>
+						<li class="nav-item"><a class="nav-link" href="/cart">Favorites</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#page-top">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/hmpage#subscribe">Contact</a></li>
+
+
+		<div class="navbar-nav ml-auto action-buttons">
+			<div class="nav-item dropdown"id="myForm">
+					<a data-toggle="dropdown" class="nav-link dropdown-toggle mr-4" ><i class="fa fa-user-circle " aria-hidden="true" style="font-size:24px"></i></a>
+                <div class="dropdown-menu action-form">
+							<h5 class="hint-text">Logout the page?</h5>
+							<div class="form-group social-btn clearfix margin-auto text-center">
+							<a type="submit" class="btn btn-secondary facebook-btn " href="javascript:void(0);" onclick="callLogout()">Logout</a>
+						</div>
+						
+						<h5 class="hint-text">Delete Account?</h5>		
+						<div class="form-group social-btn clearfix margin-auto text-center">
+							<a type="submit" class="btn btn-secondary twitter-btn deleteac" id="del" href="/userpage">Confirm</a>
+						</div>
+						
+						<div class="text-center mt-2">
+							<a href="#">Forgot Your password?</a>
+						</div>		
+                </div>
+			</div>
+        </div>
+		
+		</ul>
+                </div>
+            </div>
+			</div>         
+        </nav>
+	
+  <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-text text-center">
+                        <h2>Blog</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Blog Area Start ##### -->
+    <div class="blog-area section-padding-80   ">
+        <div class="container  ">
+            <div class="row ">
+           <div class="col-12 col-lg-8 mb-50">
+                    <div class="blog-posts-area ">
+
+                        <!-- Single Blog Area -->
+                        <div class="single-blog-area mb-50">
+
+                            <!-- Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <img src="img/blogimg/1.jpg" alt="">
+										<!-- Post Date -->
+                                <div class="post-date">
+                                    <a href="#"><span>10</span>May<br> 2022</a>
+ 								        </div>  
+                             </div>
+                            <!-- Content -->
+                            <div class="blog-content">                             
+ 							 <a href="#" class="post-title">MICHELIN-Listed Hotels In Hong Kong For Foodie Staycations</a>
+                                <div class="meta-data">by <a href="">Laura Lo       </a> 		
+								
+							<span ><i class="fas fa-thumbs-up"  style="font-size:24px"></i></span>		
+							<button ><i class="fas fa-thumbs-down" style="font-size:24px"></i></button>									
+                                </div>
+                                <p>To foodies, a staycation is not just about what pampering services and facilities you can enjoy during the stay, but the food you are being offered as well. We round up several staycation packages that are designed with a focus on food — from meals at the hotel's MICHELIN restaurants, to multi-course in-room dinner feasts curated by their kitchen teams, these packages are bound to put a smile on every foodie's face.</p>
+								<a href="https://guide.michelin.com/hk/en/article/features/hong-kong-hotel-staycation-foodie-michelin-star-restaurants" class="btn delicious-btn mt-30">Read More</a>
+                            </div>
+                        </div>
+
+                        <!-- Single Blog Area -->
+                        <div class="single-blog-area mb-50">
+                            <!-- Thumbnail -->
+                            <div class="blog-thumbnail">
+							<iframe width="800" height="600" src="https://www.youtube.com/embed/VyLb0XdOoSM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							<!-- Post Date -->
+                                <div class="post-date">
+                                    <a href="#"><span>31</span>July<br> 2022</a>
+ 								        </div>  
+                            </div>
+                            <!-- Content -->
+                            <div class="blog-content">
+                                <a href="#" class="post-title">Seafood Fettuccine 焗海鮮寬條麵</a>
+                                <div class="meta-data">by <a href="#">Laura Lo</a> 
+                                </div>
+                                <p>👩‍🍳 本集食譜👨‍🍳
+								<li>一人份量 Serve1 </li>
+								<li>無鹽牛油 10g Unsalted Butter</li>
+								<li>麵粉 10g Flour</li>
+								<li>牛奶 200ml Milk</li>
+								<li>鹽 1/4tsp Salt  </li>
+								<li>砂糖 1/2tsp Sugar</li>
+								<li>巴馬臣芝士碎 10g Shredded Parmesan Cheese</li>
+								<li>寬條麵 120g Fettuccine</li>
+
+								<li>蒜頭 2cloves Garlic</li>
+								<li>雜錦海鮮 100g Mixed Seafood</li>
+								<li>鹽 少許 Salt</li>
+								<li>黑椒 少許 Black Pepper </li>
+								<li>白酒 10ml White Wine</li>
+								<li>水牛芝士碎 20g Shredded Mozzarella Cheese</li>
+                                <a href="https://www.youtube.com/watch?v=VyLb0XdOoSM " class="btn delicious-btn mt-30">Read More</a>
+                            </div>
+                        </div>
+
+                        <!-- Single Blog Area -->
+                        <div class="single-blog-area mb-50">
+                            <!-- Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <img src="img/blogimg/3.jpg" alt="">
+								<!-- Post Date -->
+                                <div class="post-date">
+                                    <a href="#"><span>2</span>Aug<br> 2022</a>
+ 								        </div>  
+                            </div>
+                            <!-- Content -->
+                            <div class="blog-content">
+                                <a href="#" class="post-title">5 Tips on how to cook the best hamburger</a>
+                                <div class="meta-data">by <a href="#">Laura Lo</a> 
+                                </div>
+                                <p>
+								<li>Lean is not always best. When you're making burgers, having the right amount of fat will help ensure that the patties do not get dried out. ...</li>
+								<li>Cook it when it's chilled. ...</li>
+								<li>Don't flatten your burgers. ...</li>
+								<li>Grill for the right amount of time. ...</li>
+								<li>Avoid thawing on the counter.</li>
+
+								</p>
+								<a href="https://learntocook.com/techniques/five-tips-for-making-the-perfect-burger/" class="btn delicious-btn mt-30">Read More</a>    
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <nav aria-label="Page navigation example mb-100">
+                        <ul class="pagination ">
+                            <li class="page-item active"><a class="page-link" href="#">01.</a></li>
+                            <li class="page-item"><a class="page-link" href="#">02.</a></li>
+                            <li class="page-item"><a class="page-link" href="#">03.</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+
+<!-------------------sidebar archive start------------------------>
+                <div class="col-12 col-lg-4">
+                    <div class="blog-sidebar-area">
+
+                        <!-- Widget -->
+                        <div class="single-widget mb-80">
+                            <h5>Archive</h5>
+                            <ul class="list">
+                                <li><a href="#">March 2018</a></li>
+                                <li><a href="#">February 2018</a></li>
+                                <li><a href="#">January 2018</a></li>
+                                <li><a href="#">December 2017</a></li>
+                                <li><a href="#">November 2017</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Widget -->
+                        <div class="single-widget mb-80">
+                            <h5>Categories</h5>
+                            <ul class="list">
+                                <li><a href="#">Restaurants</a></li>
+                                <li><a href="#">Food &amp; Drinks</a></li>
+                                <li><a href="#">Vegans</a></li>
+                                <li><a href="#">Events &amp; Lifestyle</a></li>
+                                <li><a href="#">Uncategorized</a></li>
+                            </ul>
+                        </div>                    
+                    </div>
+                </div>
+
+<!---------------------sidebar archive end-------------------------->
+
+ <!-----------------------Comments Start ---------------------------->                              
+ 				   
+     <div class="single-blog-area mb-50">
+         <div class="blog-thumbnail" >
+			<div class="contact-form-area">	
+				<div class="mb-30 text-decoration-underline"  > <h4>Leave a comment</h4></div>			
+				<div class="row">
+                    <div class="col-12">
+                          <input type="text" class="form-control" id="name" placeholder="Name">
+                     </div>
+                     <div class="col-12">
+                          <input type="email" class="form-control" id="email" placeholder="Email">
+                     </div>
+					<div class="col-12">
+						<textarea name="message" class="form-control" id="mymessage" cols="30" rows="20" placeholder="Message"  ></textarea>
+					</div>                                 
+                    <div class="col-12">
+                        <button class="btn delicious-btn mt-20" onClick="myComment()" >Post Comments</button>
+                    </div>
+                </div>
+			</div>
+		</div>	
+	</div>
+
+					
+<!-----------------------Comments End ---------------------------->  
+
+
+            </div>
+        </div>
+    </div>
+	
+	
+   <!-- ##### Blog Area End ##### -->
+
+
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Delicious Food Blog 2022</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
+    <!-- ##### All Javascript Files ##### -->
+
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+	<script src="js/scripts.js"></script>
+
+    </body>
+</html>
